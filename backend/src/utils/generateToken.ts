@@ -5,7 +5,7 @@ export default function generateToken(userId: string, res: Response) {
     expiresIn: '3d',
   });
   res.cookie('jwt', token, {
-    maxAge: 2 * 24 * 60 * 60 * 1000,
+    expires: new Date(Date.now() + 86400000),
     httpOnly: true,
     sameSite: 'strict',
     secure: process.env.NODE_ENV !== 'development',

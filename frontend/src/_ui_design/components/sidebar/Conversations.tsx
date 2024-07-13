@@ -1,0 +1,15 @@
+import useConversations from '../../../hooks/useConversations';
+import Conversation from './Conversation';
+
+const Conversations = () => {
+  const { conversations, loading } = useConversations();
+  return (
+    <div className="py-2 flex flex-col overflow-auto">
+      {conversations.map((conversation) => (
+        <Conversation key={conversation.id} conversation={conversation} />
+      ))}
+      {loading ? <span className="loading loading-spinner mx-auto" /> : null}
+    </div>
+  );
+};
+export default Conversations;

@@ -76,12 +76,19 @@ export const login = async (req, res) => {
                 .json({ message: 'Invalid credentials', success: false });
         }
         generateToken(user?.id, res);
-        return res
-            .status(200)
-            .json({ message: 'Logged in successfully', success: true });
+        return res.status(200).json({
+            message: 'Logged in successfully',
+            success: true,
+            user: {
+                id: user?.id,
+                fullName: user?.fullName,
+                username: user?.username,
+                profile: user?.profile,
+            },
+        });
     }
     catch (error) {
-        console.log('Error in logout', error?.message);
+        console.log('Error in login', error?.message);
         return res.status(500).json({ success: false, message: error?.message });
     }
 };
