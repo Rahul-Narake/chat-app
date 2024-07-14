@@ -4,14 +4,16 @@ import {
   setSelectedConversation,
 } from '../../../features/conversation/conversationSlice';
 import { RootState } from '../../../store';
+import { useSocketContext } from '../../../context/SocketContextProvider';
 
 const Conversation = ({ conversation }: { conversation: ConversationType }) => {
   const dispatch = useDispatch();
+  const { onlineUsers } = useSocketContext();
   const selectedConversation = useSelector(
     (state: RootState) => state.conversation.selectedConversation
   );
   const selected = selectedConversation?.id === conversation.id;
-  const isOnline = false;
+  const isOnline = onlineUsers.includes(conversation?.id);
 
   return (
     <>
